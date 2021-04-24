@@ -2,44 +2,48 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    siteTitle: 'Chronoblog Netlify CMS Example',
-    siteDescription: 'Starter for Gatsby Theme Chronoblog',
+    siteTitle: 'Thoughts on code and people',
+    siteDescription: 'Thoughts on code and people | Manos Liakos',
     siteImage: '/banner.png', // main image of the site for metadata
-    siteUrl: 'https://chronoblog-netlify-cms.now.sh/',
-    pathPrefix: '/',
+    siteUrl: 'https://blog.manos-liakos.dev',
+    pathPrefix: `/`,
     siteLanguage: 'en',
     ogLanguage: `en_US`,
-    author: 'Site Author', // for example - 'Ivan Ganev'
-    authorDescription: 'short author description', // short text about the author
-    avatar: '/avatar.jpg',
+    author: 'Emmanouil Liakos', // for example - 'Ivan Ganev'
+    authorDescription: 'Software Engineer', // short text about the author
+    avatar: 'avatar.webp',
     twitterSite: '', // website account on twitter
     twitterCreator: '', // creator account on twitter
     social: [
       {
-        icon: `at`,
-        url: `mailto:mymail@mail.com`,
+        icon: `envelope`,
+        url: `mailto:mail@manos-liakos.dev`
       },
       {
-        icon: `twitter`,
-        url: `https://twitter.com/ganevru`,
+        icon: `linkedin`,
+        url: `https://www.linkedin.com/in/manos-liakos/`
       },
       {
         icon: `github`,
-        url: `https://github.com/Chronoblog/gatsby-theme-chronoblog`,
+        url: `https://github.com/mliakos`
       },
       {
-        icon: `node-js`,
-        url: `https://www.npmjs.com/package/gatsby-theme-chronoblog`,
+        icon: `at`,
+        url: `https://manos-liakos.dev/`
       },
-    ],
+      {
+        icon: `dev`,
+        url: `https://dev.to/mliakos/`
+      }
+    ]
   },
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: path.join(__dirname, `static`, `media`),
-        name: 'media',
-      },
+        name: 'media'
+      }
     },
     {
       resolve: 'gatsby-theme-chronoblog',
@@ -49,7 +53,7 @@ module.exports = {
           feedShowMoreButton: 'show more',
           feedSearchPlaceholder: 'search',
           cardReadMoreButton: 'read more →',
-          allTagsButton: 'all tags',
+          allTagsButton: 'all tags'
         },
         feedItems: {
           // global settings for feed items
@@ -58,51 +62,51 @@ module.exports = {
           yearSeparatorSkipFirst: true,
           contentTypes: {
             links: {
-              beforeTitle: '🔗 ',
-            },
-          },
+              beforeTitle: '🔗 '
+            }
+          }
         },
         feedSearch: {
-          symbol: '🔍',
-        },
-      },
+          symbol: '🔍'
+        }
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Chronoblog Gatsby Theme`,
-        short_name: `Chronoblog`,
-        start_url: `/`,
+        name: `Thoughts on code and people`,
+        short_name: `Thoughts on code and people`,
+        start_url: `https://manos-liakos.dev/`,
         background_color: `#fff`,
         theme_color: `#3a5f7d`,
         display: `standalone`,
-        icon: `src/assets/favicon.png`,
-      },
+        icon: `src/assets/favicon.png`
+      }
     },
     {
-      resolve: `gatsby-plugin-sitemap`,
+      resolve: `gatsby-plugin-sitemap`
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
         // replace "UA-XXXXXXXXX-X" with your own Tracking ID
-        trackingId: 'UA-XXXXXXXXX-X',
-      },
+        trackingIds: ['G-2PG4GD6KM0']
+      }
     },
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
         // replace "chronoblog-any" with your own disqus shortname
-        shortname: `chronoblog-any`,
-      },
+        shortname: `chronoblog-any`
+      }
     },
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
         publicPath: `admin`,
-        modulePath: path.join(__dirname, `src`, `netlifycms`, 'cms.js'),
-      },
+        modulePath: path.join(__dirname, `src`, `netlifycms`, 'cms.js')
+      }
     },
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
-  ],
+    'gatsby-plugin-netlify' // make sure to keep it last in the array
+  ]
 };
