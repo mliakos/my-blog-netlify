@@ -11,7 +11,7 @@ module.exports = {
     ogLanguage: `en_US`,
     author: 'Emmanouil Liakos', // for example - 'Ivan Ganev'
     authorDescription: 'Software Engineer', // short text about the author
-    avatar: 'avatar.webp',
+    avatar: '/avatar.webp',
     twitterSite: '', // website account on twitter
     twitterCreator: '', // creator account on twitter
     social: [
