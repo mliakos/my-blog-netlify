@@ -38,6 +38,8 @@ The goal is to implement a web application that will be used by a remote scrum t
 
 You can check it live [here](https://manos-liakos.dev/scrum-voting-app/).
 
+The code is also [here](https://github.com/mliakos/scrum-voting-app).
+
 Phew, that seemed quite overwhelming 🤯. This project was part of a code challenge, so don't put the blame on me 😂 Anyway, let's get down to it.
 
 # Planning the application
