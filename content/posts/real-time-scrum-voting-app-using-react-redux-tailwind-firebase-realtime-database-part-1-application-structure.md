@@ -212,4 +212,6 @@ Now we're ready to use our database.
 
 - - -
 
-That's it for this part, I hope you found it interesting. Let me know if you catch any errors and stay tuned for part 2 🧐.
+That's it for this part, I hope you found it interesting. 
+
+Let me know if you catch any errors and stay tuned for part 2!
