@@ -15,7 +15,9 @@ hide: false
 ---
 Hi y' all, this is part 1 of a multi-part series, in which we are going to build a **[real-time scrum voting app](https://manos-liakos.dev/scrum-voting-app/)** using some of the hottest frontend technologies! 😎
 
-# **Stack**
+- - -
+
+# Stack
 
 * **React & Redux** for state management.
 * **Tailwind CSS** for quick and effortless styling.
