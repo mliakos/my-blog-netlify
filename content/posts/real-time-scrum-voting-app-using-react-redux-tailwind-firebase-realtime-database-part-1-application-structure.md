@@ -13,7 +13,7 @@ tags:
 draft: false
 hide: false
 ---
-Hi y' all, this is part 1 of a multi-part series, in which we are going to build a** [real-time scrum voting app](https://manos-liakos.dev/scrum-voting-app/)** using some of the hottest frontend technologies! 😎
+Hi y' all, this is part 1 of a multi-part series, in which we are going to build a **[real-time scrum voting app](https://manos-liakos.dev/scrum-voting-app/)** using some of the hottest frontend technologies! 😎
 
 # **Stack**
 
