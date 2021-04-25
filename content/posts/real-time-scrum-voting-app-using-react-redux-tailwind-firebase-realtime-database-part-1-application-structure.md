@@ -49,9 +49,9 @@ I visually divide the app into logical, **self-isolated components with discrete
 
 Then I search for **reusable components** which will either be placed in a `common `module folder (in bigger projects) or will just be created with reusability in mind (dynamic, prop-based styling, etc.). 
 
-**Wrappers** are also reusable components which wrap other (child) components to provide them with extra functionality (visual or logical). They are officially called[ HOCs or Higher Order Components](https://reactjs.org/docs/higher-order-components.html). I search for those kind of components, too. Imagine a component `Layout` which wraps our pages and provides them with static elements like `Header`, `Footer`, `Menu`, etc. or a `Card` component which wraps its children in a card-like element.
+**Wrappers** are also reusable components which wrap other (child) components to provide them with extra functionality (visual or logical). They are officially called[ HOCs or Higher Order Components](https://reactjs.org/docs/higher-order-components.html). I search for those kind of components, too. Imagine a `Layout` component which wraps our pages and provides them with static elements like `Header`, `Footer`, `Menu`, etc. or a `Card` component which wraps its children in a card-like element.
 
-Next, I try to **delegate possible state (stateful vs stateless)** to each one of them, in case we are not using a centralized store for state management. In this case we will be using Redux, so only purely local state will be in-component.
+Next, I try to **delegate possible state** to each one of them (identifying **stateful** and **stateless** components), in case we are not using a centralized store for state management. In this case we will be using **[Redux](https://redux.js.org/)**, so only purely local state will be in-component.
 
 Finally, I plan the app's folder structure as well as possible. Should the need to make changes down the road arise, especially if the app grows, a solid foundation is going to make for a resilient app.
 
@@ -63,7 +63,7 @@ By taking a look at the image above, one could easily distinguish between the fo
 
 ### Wrappers (HOCs)
 
-* Card (Used to wrap VotingArea & Users components)
+* Card (Used to wrap VotingArea & Users/Participants components)
 
 ### Common/reusable
 
@@ -81,7 +81,7 @@ By taking a look at the image above, one could easily distinguish between the fo
 
 ## Stateful
 
-All of our state is going to live in the Redux store 😊
+All of our state is going to live in the Redux store, so no planning is going to take place in here 😊
 
 ## Folder structure
 
@@ -112,29 +112,41 @@ Our app's code will live in `src` folder and is going to have the following stru
  
 ```
 
-I hope it's mostly self-explaining. We are going to add some more folders in a later part, but for now a bird's eye view is just fine.
+I hope it's mostly self-explaining. We are going to add some more folders in a later part, but for now, a bird's-eye view should do it.
 
 # Initialize application
 
-Run `npx create-react-app scrum-voting-app` to initialize our app.
+To initialize our app, run:d
+
+```shell
+npx create-react-app scrum-voting-app
+```
 
 ## Install dependencies
 
 ### Tailwind CSS
 
-You can pretty much follow the official instructions [here](https://tailwindcss.com/docs/guides/create-react-app), there's no point in repeating them here.
+You can pretty much follow the official instructions [here](https://tailwindcss.com/docs/guides/create-react-app), there's no point in repeating them in this post.
 
 ### Redux
 
 We're going to use **plain redux** without any helpers (i.e. redux-toolkit). We are also going to **use redux-thunk** middleware to handle our async actions.
 
-Run `npm i redux react-redux redux-thunk`.
+Run:
+
+```shell
+npm i redux react-redux redux-thunk
+```
 
 ### Firebase
 
-Here we need two libraries, **firebase** and **react-redux-firebase**. The first one is the Firebase SDK needed to connect to our database instance. The second one are Redux bindings for Firebase to make our lives easier.
+Here we need two libraries, **firebase** and **react-redux-firebase**. The first one is the Firebase SDK needed to connect to our database instance. The second one provides us with Redux bindings for Firebase in order to make our lives easier.
 
-Run `npm i firebase react-redux-firebase`.
+Run:
+
+```shell
+npm i firebase react-redux-firebase
+```
 
 ## Modify files and structure
 
@@ -154,9 +166,9 @@ Create the rest of the folders inside `src`, as seen in the **Folder Structure**
 
 # Setting up Firebase
 
-The next step, after we've finished designing our application, is to set up Firebase.
+The next step, after we've finished drafting our application's blueprint, is to set up Firebase.
 
-Firebase is a cloud JSON database which lets us store data in key-value pairs. It's Realtime Database flavor gives us the ability to synchronize every client using emitted events. Pretty cool, right? 🥳
+**Firebase** is a cloud JSON database which lets us store data in key-value pairs. Its **Realtime Database** flavor gives us the ability to synchronize every client using emitted events. All we have to do is utilize the API and create our handlers. Pretty cool, right? 🥳
 
 ## Create an account
 
@@ -168,7 +180,7 @@ Click on **"Realtime Database"** in the menu bar and then **"Create Database"**.
 
 ## Adding a configuration file
 
-Go to your project settings in Firebase console (Project Overview > Project Settings) and scroll down to **"Your apps"** section. Select the app an under **"Firebase SDK snippet"** choose **"Config"**. This is our config object.
+Go to your project settings in Firebase console (Project Overview > Project Settings) and scroll down to **"Your apps"** section. Select our app and under **"Firebase SDK snippet"** choose **"Config"**. This is our config object, copy it.
 
 Create a file called `firebase.js` inside `config` folder and paste the config object and some additional code, likewise:
 
