@@ -2,7 +2,7 @@
 title: Real-time app using React, Redux, Tailwind & Firebase Realtime Database -
   Part 1
 cover: /media/react-redux-firebase.png
-date: 2021-04-25T19:11:41.292Z
+date: 2021-04-25T19:13:53.651Z
 description: "In this first part we are going to take a look at the
   requirements, plan the application structure, initialize a React app and set
   up Firebase. "
@@ -47,7 +47,7 @@ One of the first things that I do when I start working on a front-end applicatio
 
 I visually divide the app into logical, **self-isolated components with discrete functionality.** 
 
-Then I search for **reusable components** which will either be placed in a `common `module folder (in bigger projects) or will just be created with reusability in mind (dynamic, prop-based styling, etc.). 
+Then I search for **reusable components** which will either be placed in a `common`module folder (in bigger projects) or will just be created with reusability in mind (dynamic, prop-based styling, etc.). 
 
 **Wrappers** are also reusable components which wrap other (child) components to provide them with extra functionality (visual or logical). They are officially called[ HOCs or Higher Order Components](https://reactjs.org/docs/higher-order-components.html). I search for those kind of components, too. Imagine a `Layout` component which wraps our pages and provides them with static elements like `Header`, `Footer`, `Menu`, etc. or a `Card` component which wraps its children in a card-like element.
 
@@ -116,7 +116,7 @@ I hope it's mostly self-explaining. We are going to add some more folders in a l
 
 # Initialize application
 
-To initialize our app, run:d
+To initialize our app, run:
 
 ```shell
 npx create-react-app scrum-voting-app
