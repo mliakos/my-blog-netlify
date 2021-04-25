@@ -5,7 +5,7 @@ cover: /media/react-redux-firebase.png
 date: 2021-04-25T12:22:23.537Z
 description: "In this first part we are going to take a look at the
   requirements, plan the application structure, initialize a React app and set
-  up our Firebase account. "
+  up Firebase. "
 slug: real-time-scrum-voting-app-part-1
 tags:
   - javascript
