@@ -2,7 +2,7 @@
 title: Real-time app using React, Redux, Tailwind & Firebase Realtime Database -
   Part 1
 cover: /media/react-redux-firebase.png
-date: 2021-04-25T12:22:23.537Z
+date: 2021-04-25T19:11:41.292Z
 description: "In this first part we are going to take a look at the
   requirements, plan the application structure, initialize a React app and set
   up Firebase. "
