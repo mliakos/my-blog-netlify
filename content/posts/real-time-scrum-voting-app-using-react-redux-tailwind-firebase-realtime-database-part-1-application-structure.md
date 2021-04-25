@@ -1,6 +1,6 @@
 ---
-title: Real-time scrum voting app using React, Redux, Tailwind & Firebase
-  Realtime Database - Part 1
+title: Real-time app using React, Redux, Tailwind & Firebase Realtime Database -
+  Part 1
 cover: /media/react-redux-firebase.png
 date: 2021-04-25T12:22:23.537Z
 description: "In this first part we are going to take a look at the
