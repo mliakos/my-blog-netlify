@@ -1,9 +1,13 @@
 ---
 title: Quick tips on writing better React code
 cover: ../../static/media/react-tips_cover.webp
-date: 2020-2-28
-description: "In this short post I am sharing some best practices that I've learned, during my journey writing React applications."
-tags: ['post', 'javascript', 'react']
+date: 2021-02-27T22:00:00.000Z
+description: In this short post I am sharing some best practices that I've
+  learned, during my journey writing React applications.
+tags:
+  - post
+  - javascript
+  - react
 ---
 
 In this short post I am sharing some best practices that I've learned, during my journey writing React applications.
