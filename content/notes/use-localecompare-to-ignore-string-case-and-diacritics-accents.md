@@ -1,5 +1,6 @@
 ---
 title: Use localeCompare to ignore string case and diacritics (accents)
+cover: /media/js_strings.png
 date: 2021-04-28T16:09:24.468Z
 slug: locale-compare
 tags:
