@@ -2,6 +2,9 @@
 title: Use localeCompare to ignore string case and diacritics (accents)
 date: 2021-04-28T16:09:24.468Z
 slug: locale-compare
+tags:
+  - note
+  - javascript
 ---
 It's a very common scenario when you have to compare strings ignoring their case. The usual approach is to convert both of them to upper or lower case:
 
