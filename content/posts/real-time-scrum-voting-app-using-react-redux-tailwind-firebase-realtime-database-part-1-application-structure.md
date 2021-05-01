@@ -76,7 +76,9 @@ By taking a look at the image above, one could easily distinguish between the fo
 ### Normal
 
 * FeatureTitle (Based on Input component)
-* Heading (Page title & Username based on Input component)
+* Heading
+
+  * Username (Based on Input component)
 * Users
 
   * User
