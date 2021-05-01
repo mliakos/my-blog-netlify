@@ -8,13 +8,16 @@ tags:
   - react
   - redux
 draft: false
-hide: true
+hide: false
 ---
+# Table of contents
+
 * [Setting up Redux](#setting-up-redux)
 
   * [Why vanilla redux](#why-vanilla-redux)
   * [Configuring the store](#configuring-the-store)
-  * * [Root reducer](#root-reducer)
+
+    * [Root reducer](#root-reducer)
     * [Application root file](#application-root-file)
   * [App component](#app-component)
   * [Installing Redux devtools](#installing-redux-devtools)
@@ -27,23 +30,26 @@ hide: true
     * [Constants](#constants)
     * [Actions](#actions)
     * [Reducer](#reducer)
-  * [Adding Firebase persistence](#adding-firebase-persistence)
+* [Adding Firebase persistence](#adding-firebase-persistence)
 
-    * [Connect Firebase with application](#connect-firebase-with-application)
-    * **[Some tips:](#--some-tips---)**
+  * [Connect Firebase with application](#connect-firebase-with-application)
+  * **[Some tips:](#--some-tips---)**
 
-      * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
-      * [Ccompose method](#ccompose-method)
-      * [ApplyMiddleware method](#applymiddleware-method)
-      * [Redux Thunk](#redux-thunk)
-    * [Connect Firebase with FeatureTitle](#connect-firebase-with-featuretitle)
+    * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
+    * [Compose method](#compose-method)
+    * [ApplyMiddleware method](#applymiddleware-method)
+    * [Redux Thunk](#redux-thunk)
+  * [Connect Firebase with component](#connect-firebase-with-component)
 
-      * [Debounce function](#debounce-function)
-      * [Firebase services](#firebase-services)
+    * [Debounce function](#debounce-function)
+    * [Push updates to Firebase](#push-updates-to-firebase)
+    * [Receive updates from Firebase](#receive-updates-from-firebase)
 
-In the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1) we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux, connect it to Firebase and create our first component.
+
 
 - - -
+
+In the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1) we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux, connect it to Firebase and create our first component.
 
 # Setting up Redux
 
@@ -57,7 +63,7 @@ As stated in the previous part, we are going to use **Redux Core** and not **Red
 > * "I have to add a lot of packages to get Redux to do anything useful"
 > * "Redux requires too much boilerplate code"
 
-The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of *webpack* here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux ](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7)architecture, in general) without getting your hands dirty at a "lower level".
+The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of *webpack* here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7) fComposearchitecture, in general) without getting your hands dirty at a "lower level".
 
 ## Configuring the store
 
@@ -82,7 +88,7 @@ export default combineReducers({
 });
 ```
 
-Also, create a file named **`feature.js`** in the same folder to avoid getting an import error. This is going to be our **`Feature` component reducer**, but just leave it empty for now and ignore the console complaining about not having a valid reducer.
+Also, create a file named **`feature.js`** in the same folder to avoid getting an import error. This is going to be our **`FeatureTitle` component reducer**, but just leave it empty for now and ignore the console complaining about not having a valid reducer.
 
 ### Application root file
 
@@ -174,7 +180,7 @@ const store = createStore(
 );
 ```
 
-Finally install the [chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) from the chrome web store. If you are not using chrome or encounter any other issue, please visit the official[ extension page](http://extension.remotedev.io/).
+Finally install the [chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) from the chrome web store. If you are not using chrome or encounter any other issue, please visit the official [extension page](http://extension.remotedev.io/).
 
 Close and re-open chrome devtools and refresh the page. You should be able to see a tab named **Redux**. This is where redux devtools live.
 
@@ -273,7 +279,7 @@ const FeatureTitle = () => {
 export default FeatureTitle;
 ```
 
-I hope that the code is mostly self-explaining. We basically grab the current title from the central store using `useSelector` hook (like `useState`, but for Redux) and assign **`value`** and `disabled` props based on its value. We also create a dispatcher to send the **`SET_TITLE`** action along with its payload (the new value).
+I hope that the code is mostly self-explaining. We basically grab the current title from the central store using `useSelector` hook (like `useState`, but for Redux) and assign **`value`** and `disabled`props based on its value. We also create a dispatcher to handle the "onChange" event, by dispatching the **`SET_TITLE`** action along with its payload (the new value).
 
 ## Crafting the state
 
@@ -289,7 +295,7 @@ Here we are simply exporting a constant named `SET_TITLE` which is going to be u
 
 ### Actions
 
-Inside `src/store/actions` create a folder named `feature`. Any action associated with the `Feature` component will be placed in there. Add a file named `setTitle.js` and paste the following code:
+Inside `src/store/actions` create a folder named `feature`. Any action associated with the `FeatureTitle`component will be placed in there. Add a file named `setTitle.js` and paste the following code:
 
 ```javascript
 import { SET_TITLE } from "../../constants/feature";
@@ -304,7 +310,7 @@ const setTitle = payload => dispatch => {
 export default setTitle;
 ```
 
-This action is solely responsible for setting the Feature title.
+This action is solely responsible for setting the `FeatureTitle` value in our Redux store.
 
 ### Reducer
 
@@ -371,10 +377,10 @@ import { applyMiddleware, createStore, compose } from "redux";
 We also need to change the way we initialize devtools:
 
 ```javascript
-// Use devtools compose method if defined, else use the regular one
+// Use devtools compose method if defined, else use the imported one from Redux
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// This will make getFirebase available to our thunks
+// This will make getFirebase method available to our thunks
 const middlewares = [thunk.withExtraArgument(getFirebase)];
 ```
 
@@ -478,7 +484,7 @@ It applies the given **middleware** and returns a **store enhancer**.
 
 #### Redux Thunk
 
-Redux Thunk is a middleware which allows us to **create actions that return a function instead of an action object.** This function returns the action object instead and gets passed as an argument to the dispatcher.
+Redux Thunk is a middleware which allows us to **create actions that return a function instead of an action object.** This function, when called, returns the action object instead which in turn gets passed as an argument to the dispatcher.
 
 ### Connect Firebase with component
 
@@ -506,9 +512,9 @@ export default function debounce(func, wait, immediate) {
 
 This is going to be used on inputs and buttons, to prevent aspiring spammers from flooding our database with requests 😏.
 
-#### Component Firebase services
+#### Push updates to Firebase
 
-Inside `src/firebase` create a folder named `feature`. This folder is going to contain all `Feature`related firebase functionality/services. Add a file named `updateTitle.js` and paste the following code:
+Inside `src/firebase` create a folder named `feature`. This folder is going to contain all **Feature** related firebase functionality/services. Add a file named `updateTitle.js` and paste the following code:
 
 ```javascript
 import debounce from "../../utils/debounce";
@@ -516,8 +522,8 @@ import { SET_TITLE } from "../../store/constants/feature";
 
 const updateTitle = ({ ref, payload, oldState, firebase, dispatch }) => {
 	firebase
-		.ref(ref) 
-		.set(payload)
+		.ref(ref) // Find reference to update
+		.set(payload) // Set new value
 		.then(error => {
 			// Revert to old state in case of error
 			if (error) {
@@ -534,7 +540,9 @@ const updateTitle = ({ ref, payload, oldState, firebase, dispatch }) => {
 export default debounce(updateTitle, 500);
 ```
 
-This function is going to be used to update the feature title in the firebase database. You can check the official Firebase Javascript SDK docs [here](https://firebase.google.com/docs/reference/js/firebase.database).
+This function is going to be used to update the **`FeatureTitle`** value in the firebase database. You can check the official Firebase Javascript SDK docs [here](https://firebase.google.com/docs/reference/js/firebase.database).
+
+#### Receive updates from Firebase
 
 Add another action named `setupFirebaseListeners.js` in `src/store/actions/feature` and paste the following code:
 
@@ -559,9 +567,11 @@ const setupFeatureListeners = () => (dispatch, getState, getFirebase) => {
 export default setupFeatureListeners;
 ```
 
-This action, once dispatched, will register an event handler for every change in `Feature` title update. This event handler will essentially dispatch the `SET_TITLE` action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes - by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated below. **This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
+This action, once dispatched, will register an event handler for every change in `FeatureTitle` value update. This event handler will essentially dispatch the `SET_TITLE` action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes (by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated below). 
 
-Head over to `src/store/actions/feature/setTitle.js` action file and modify it to be like this:
+**This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
+
+Head over to `src/store/actions/feature/setTitle.js` action file and modify it to push updates to Firebase:
 
 ```javascript
 import { SET_TITLE } from "../../constants/feature";
@@ -602,7 +612,7 @@ export default setTitle;
 
 ***NOTE:*** The key thing to notice here is that we are calling the Firebase middleware function **independently of Redux state update (dispatch).** This effectively **decouples the UI state from the Firebase state.** This is important, because if we updated the state after the Firebase promise resolution (either success or failure) then **the UI would be unresponsive and laggy.** **This way, we immediately update the application state, assuming changes were successful and revert to the old one, in case something goes wrong. That's why we pass `oldState` to `firebaseUpdateTitle`.**
 
-Finally, inside **`App`** component import `FeatureTitle` component, initialize main layout and register `Feature`component event handlers. Replace the code inside `src/containers/App.js` with the following:
+Finally, inside **`App`** component import `FeatureTitle`, initialize main layout and register **Feature** event handlers. Replace the code inside `src/containers/App.js` with the following:
 
 ```javascript
 import "./App.css";
@@ -617,7 +627,7 @@ import setupFeatureListeners from "../store/actions/feature/setupFirebaseListene
 function App() {
 	const dispatch = useDispatch();
 
-	// Setting up listeners
+	// Setting up feature listeners
 	useEffect(() => {
 		dispatch(setupFeatureListeners());
 	}, []);
@@ -644,4 +654,4 @@ Go to `localhost:3000` and you should be able see our component in the center of
 
 That's it for this part, hope it wasn't tedious. Let me know if you found it interesting.
 
-Any feedback is also appreciated. Stay tuned for part 3! 😎
+Any other feedback is also appreciated! Stay tuned for part 3 😎
