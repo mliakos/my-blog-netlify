@@ -13,10 +13,8 @@ hide: true
 * [Setting up Redux](#setting-up-redux)
 
   * [Why vanilla redux](#why-vanilla-redux)
-  * [Purpose\[](https://redux-toolkit.js.org/introduction/getting-started#purpose "Direct link to heading")](#purpose---https---redux-toolkitjsorg-introduction-getting-started-purpose--direct-link-to-heading--)
   * [Configuring the store](#configuring-the-store)
-
-    * [Root reducer](#root-reducer)
+  * * [Root reducer](#root-reducer)
     * [Application root file](#application-root-file)
   * [App component](#app-component)
   * [Installing Redux devtools](#installing-redux-devtools)
@@ -53,15 +51,13 @@ In the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-
 
 As stated in the previous part, we are going to use **Redux Core** and not **Redux Toolkit**, which includes **Redux Core**, plus a few other packages and abstractions to make development easier. From the [official page](https://redux-toolkit.js.org/introduction/getting-started):
 
-> ## Purpose[](https://redux-toolkit.js.org/introduction/getting-started#purpose "Direct link to heading")
->
 > The **Redux Toolkit** package is intended to be the standard way to write [Redux](https://redux.js.org/) logic. It was originally created to help address three common concerns about Redux:
 >
 > * "Configuring a Redux store is too complicated"
 > * "I have to add a lot of packages to get Redux to do anything useful"
 > * "Redux requires too much boilerplate code"
 
-The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of webpack here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux ](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7)architecture, in general) without getting your hands dirty at a "lower level".
+The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of *webpack* here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux ](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7)architecture, in general) without getting your hands dirty at a "lower level".
 
 ## Configuring the store
 
@@ -342,7 +338,7 @@ export default featureReducer;
 
 As you can see, the reducer is just a function which receives the current **`state`** and the **`action`** to be performed as arguments and calculates the new state derived from that action.
 
-## Adding Firebase persistence
+# Adding Firebase persistence
 
 The final step for a working component is adding persistence to our database. To accomplish this, we first need to wrap our app with the Firebase Provider component. 
 
@@ -391,7 +387,7 @@ const store = createStore(
 );
 ```
 
-Then, wrap the `App`component with **`ReactReduxFirebaseProvider`** like this:
+Then, wrap the `App` component with **`ReactReduxFirebaseProvider`** like this:
 
 ```javascript
 ReactDOM.render(
@@ -563,7 +559,7 @@ const setupFeatureListeners = () => (dispatch, getState, getFirebase) => {
 export default setupFeatureListeners;
 ```
 
-This action, once dispatched, will register an event handler for every change in `Feature`title update. This event handler will essentially dispatch the `SET_TITLE` action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes - by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated earlier. **This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
+This action, once dispatched, will register an event handler for every change in `Feature` title update. This event handler will essentially dispatch the `SET_TITLE` action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes - by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated below. **This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
 
 Head over to `src/store/actions/feature/setTitle.js` action file and modify it to be like this:
 
