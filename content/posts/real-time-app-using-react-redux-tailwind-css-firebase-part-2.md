@@ -176,7 +176,7 @@ It should now look like this:
 ```javascript
 const store = createStore(
 	rootReducer,
-	composeEnhancers(applyMiddleware(...middlewares)) // Add this
+	window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION() // Add this
 );
 ```
 
@@ -243,7 +243,7 @@ We created a generic, fairly flexible `Input`component with dynamic styling, pla
 
 ## Designing FeatureTitle component
 
-Go ahead and create a folder named `FeatureTitle`in `src/components`. Add a file named `index.js` and paste the component code:
+Go ahead and create a folder named `FeatureTitle` in `src/components`. Add a file named `index.js` and paste the component code:
 
 ```javascript
 import Input from "../Input";
