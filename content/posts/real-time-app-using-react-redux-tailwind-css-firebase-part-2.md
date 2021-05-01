@@ -13,34 +13,33 @@ draft: false
 hide: false
 ---
 # Table of contents
+* ## **1. [Setting up Redux](#setting-up-redux)**
 
-* [Setting up Redux](#setting-up-redux)
+   * [Why vanilla redux](#why-vanilla-redux)
+   * [Configuring the store](#configuring-the-store)
 
-  * [Why vanilla redux](#why-vanilla-redux)
-  * [Configuring the store](#configuring-the-store)
-
-    * [Root reducer](#root-reducer)
-    * [Application root file](#application-root-file)
+      * [Root reducer](#root-reducer)
+      * [Application root file](#application-root-file)
   * [App component](#app-component)
   * [Installing Redux devtools](#installing-redux-devtools)
-* [Creating FeatureTitle component](#creating-featuretitle-component)
+* ## **2. [Creating FeatureTitle component](#creating-featuretitle-component)**
 
   * [Designing a generic Input component](#designing-a-generic-input-component)
   * [Designing FeatureTitle component](#designing-featuretitle-component)
   * [Crafting the state](#crafting-the-state)
 
-    * [Constants](#constants)
-    * [Actions](#actions)
-    * [Reducer](#reducer)
-* [Adding Firebase persistence](#adding-firebase-persistence)
+      * [Constants](#constants)
+      * [Actions](#actions)
+      * [Reducer](#reducer)
+* ## **3. [Adding Firebase persistence](#adding-firebase-persistence)**
 
   * [Connect Firebase with application](#connect-firebase-with-application)
   * **[Some tips:](#--some-tips---)**
 
-    * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
-    * [Compose method](#compose-method)
-    * [ApplyMiddleware method](#applymiddleware-method)
-    * [Redux Thunk](#redux-thunk)
+      * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
+      * [Compose method](#compose-method)
+      * [ApplyMiddleware method](#applymiddleware-method)
+      * [Redux Thunk](#redux-thunk)
   * [Connect Firebase with component](#connect-firebase-with-component)
 
     * [Debounce function](#debounce-function)
