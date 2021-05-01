@@ -7,7 +7,8 @@ tags:
   - javascript
   - react
   - redux
-draft: true
+draft: false
+hide: true
 ---
 In the last part we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux and craft our first component.
 
