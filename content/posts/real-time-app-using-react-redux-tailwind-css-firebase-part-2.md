@@ -63,7 +63,7 @@ As stated in the previous part, we are going to use **Redux Core** and not **Red
 > * "I have to add a lot of packages to get Redux to do anything useful"
 > * "Redux requires too much boilerplate code"
 
-The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of *webpack* here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7) fComposearchitecture, in general) without getting your hands dirty at a "lower level".
+The reason we are not going to use **Redux Toolkit**, or any other similar package is simply because **getting to know the intricacies** of the tools you use to build important parts of your application - and state management is one of them - is of paramount importance. I'm not talking about learning the internals of *webpack* here, but knowing how to setup and develop a vanilla Redux project before using various abstractions and templates, IMHO, is a must. Furthermore, you won't be able to **understand the core Redux concepts** (or [Flux](https://medium.com/@sidathasiri/flux-and-redux-f6c9560997d7) architecture, in general) without getting your hands dirty at a "lower level".
 
 ## Configuring the store
 
