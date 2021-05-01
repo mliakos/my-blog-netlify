@@ -10,7 +10,40 @@ tags:
 draft: false
 hide: true
 ---
-In the last part we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux and craft our first component.
+* [Setting up Redux](#setting-up-redux)
+
+  * [Why vanilla redux](#why-vanilla-redux)
+  * [Purpose\[](https://redux-toolkit.js.org/introduction/getting-started#purpose "Direct link to heading")](#purpose---https---redux-toolkitjsorg-introduction-getting-started-purpose--direct-link-to-heading--)
+  * [Configuring the store](#configuring-the-store)
+
+    * [Root reducer](#root-reducer)
+    * [Application root file](#application-root-file)
+  * [App component](#app-component)
+  * [Installing Redux devtools](#installing-redux-devtools)
+* [Creating FeatureTitle component](#creating-featuretitle-component)
+
+  * [Designing a generic Input component](#designing-a-generic-input-component)
+  * [Designing FeatureTitle component](#designing-featuretitle-component)
+  * [Crafting the state](#crafting-the-state)
+
+    * [Constants](#constants)
+    * [Actions](#actions)
+    * [Reducer](#reducer)
+  * [Adding Firebase persistence](#adding-firebase-persistence)
+
+    * [Connect Firebase with application](#connect-firebase-with-application)
+    * **[Some tips:](#--some-tips---)**
+
+      * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
+      * [Ccompose method](#ccompose-method)
+      * [ApplyMiddleware method](#applymiddleware-method)
+      * [Redux Thunk](#redux-thunk)
+    * [Connect Firebase with FeatureTitle](#connect-firebase-with-featuretitle)
+
+      * [Debounce function](#debounce-function)
+      * [Firebase services](#firebase-services)
+
+In the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1) we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux, connect it to Firebase and create our first component.
 
 - - -
 
@@ -36,7 +69,7 @@ In this series I won't be explaining how Redux works, only providing brief insig
 
 ### Root reducer
 
-The first thing we are going to do is create the **root reducer**. The root reducer is going to **combine** all of our reducers inside **`src/store/reducers`**. This gives us the ability to namespace our state, by creating different slices of it and separate business logic. As it is stated in the [official FAQ section](https://redux.js.org/faq/reducers#how-do-i-share-state-between-two-reducers-do-i-have-to-use-combinereducers):
+The first thing we are going to do is create the **root reducer**. The root reducer is going to **combine** all of our reducers inside **`src/store/reducers`**. This gives us the ability to **namespace** our state, by creating different slices of it and separate business logic. As stated in the [official FAQ section](https://redux.js.org/faq/reducers#how-do-i-share-state-between-two-reducers-do-i-have-to-use-combinereducers):
 
 > The suggested structure for a Redux store is to split the state object into multiple “slices” or “domains” by key, and provide a separate reducer function to manage each individual data slice. This is similar to how the standard Flux pattern has multiple independent stores, and Redux provides the [`combineReducers`](https://redux.js.org/api/combinereducers) utility function to make this pattern easier.
 
@@ -81,11 +114,11 @@ ReactDOM.render(
 );
 ```
 
-In the above snippet, we basically import thepass the **root reducer** to the `createStore`method in order to create our **store**. After that, we pass it as a **prop** to the `Provider`component, which is going to wrap the `App`component and make our React app aware of the store. 
+In the above snippet, we basically pass the **root reducer** to the `createStore` method in order to create our **store**. After that, we pass it as a **prop** to the `Provider` component, which is going to wrap the `App` component and make our React app aware of the store. 
 
 ## App component
 
-Now we should be able to use redux inside our app. In `App.js` inside `src/containers/App.js` import some Redux hooks to make sure that everything is running smoothly. It should look like this:
+Now we should be able to use redux inside our app. Inside `src/containers/App.js` import some Redux hooks to make sure that everything is running smoothly. It should look like this:
 
 ```javascript
 import logo from "../logo.svg";
@@ -147,13 +180,13 @@ const store = createStore(
 
 Finally install the [chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) from the chrome web store. If you are not using chrome or encounter any other issue, please visit the official[ extension page](http://extension.remotedev.io/).
 
-Close and re-open chrome devtools and refresh the page. You should be able to see a tab named **Redux**. This is where redux devtools are.
+Close and re-open chrome devtools and refresh the page. You should be able to see a tab named **Redux**. This is where redux devtools live.
 
 ***NOTE:*** Later on, we are going to change the way we initialize devtools, because we are going to use store **enhancers** and **middleware.**
 
 # Creating FeatureTitle component
 
-Now that we've set up Redux we are ready to create our first component! We will begin by **designing a generic Input component**, then move on to **crafting its state** and finally add **Firebase persistence**. By taking a look at our [component diagram](https://blog.manos-liakos.dev/media/voting-app-components.png) from the previous part, we can clearly see that `FeatureTitle` and `UserName`are simple `input` components with their functionality doubling as **data input** and **data display**. A generic `Input` component is going to be used to facilitate the creation of `FeatureTitle`and **`UserName`** components.
+Now that we've set up Redux we are ready to create our first component! We will begin by **designing a generic Input component**, then move on to **crafting its state** and finally add **Firebase persistence**. By taking a look at our [component diagram](https://blog.manos-liakos.dev/media/voting-app-components.png) from the previous part, we can clearly see that `FeatureTitle`and `UserName`are simple `input` components with their functionality doubling as **data input** and **data display**. A generic `Input`component is going to be used to facilitate the creation of `FeatureTitle`and **`UserName`** components.
 
 ## Designing a generic Input component
 
@@ -385,15 +418,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./containers/App";
 
+// Redux imports
 import rootReducer from "./store/reducers/index";
 import { applyMiddleware, createStore, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
+// Firebase imports
 import { getFirebase } from "react-redux-firebase";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import config from "./config/firebase";
-
 import firebase from "firebase/app";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -418,7 +452,6 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById("root")
 );
-
 ```
 
 In case you face any issues, the official documentation for **react-redux-firebase** is [here](https://react-redux-firebase.com/).
@@ -433,11 +466,11 @@ In short:
 
 You can read more about extending Redux functionality [here](https://redux.js.org/recipes/configuring-your-store#extending-redux-functionality).
 
-#### Ccompose method
+#### Compose method
 
 The `compose` method is a utility function often seen in functional programming. As stated [here](https://redux.js.org/api/compose):
 
-> You might want to use it to apply several [store enhancers](https://redux.js.org/understanding/thinking-in-redux/glossary#store-enhancer) in a row.
+> You might want to use it to apply several [store enhancers](https://redux.js.org/understanding/thinking-in-redux/glossary#store-enhancer) in a row.
 
 #### ApplyMiddleware method
 
@@ -451,7 +484,7 @@ It applies the given **middleware** and returns a **store enhancer**.
 
 Redux Thunk is a middleware which allows us to **create actions that return a function instead of an action object.** This function returns the action object instead and gets passed as an argument to the dispatcher.
 
-### Connect Firebase with FeatureTitle
+### Connect Firebase with component
 
 Now that we integrated Firebase with Redux and connected everything to our App component, we can manipulate data saved in Firebase from anywhere, through our Redux store! 
 
@@ -473,14 +506,13 @@ export default function debounce(func, wait, immediate) {
 		if (immediate && !timeout) func.apply(context, args);
 	};
 }
-
 ```
 
 This is going to be used on inputs and buttons, to prevent aspiring spammers from flooding our database with requests 😏.
 
-#### Firebase services
+#### Component Firebase services
 
-Inside `src/firebase` create a folder named `feature`. This folder is going to contain all `Feature` related firebase functionality/services. Add a file named `updateTitle.js` and paste the following code:
+Inside `src/firebase` create a folder named `feature`. This folder is going to contain all `Feature`related firebase functionality/services. Add a file named `updateTitle.js` and paste the following code:
 
 ```javascript
 import debounce from "../../utils/debounce";
@@ -488,7 +520,7 @@ import { SET_TITLE } from "../../store/constants/feature";
 
 const updateTitle = ({ ref, payload, oldState, firebase, dispatch }) => {
 	firebase
-		.ref(ref) // The path to update
+		.ref(ref) 
 		.set(payload)
 		.then(error => {
 			// Revert to old state in case of error
@@ -504,12 +536,9 @@ const updateTitle = ({ ref, payload, oldState, firebase, dispatch }) => {
 };
 
 export default debounce(updateTitle, 500);
-
 ```
 
-This function is going to be used to update the feature title.
-
-
+This function is going to be used to update the feature title in the firebase database. You can check the official Firebase Javascript SDK docs [here](https://firebase.google.com/docs/reference/js/firebase.database).
 
 Add another action named `setupFirebaseListeners.js` in `src/store/actions/feature` and paste the following code:
 
@@ -532,10 +561,9 @@ const setupFeatureListeners = () => (dispatch, getState, getFirebase) => {
 };
 
 export default setupFeatureListeners;
-
 ```
 
-This action, once dispatched, will register an event handler for every change in `Feature`title update. This event handler will essentially dispatch the `SET_TITLE`action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes - by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated earlier. **This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
+This action, once dispatched, will register an event handler for every change in `Feature`title update. This event handler will essentially dispatch the `SET_TITLE` action, in order to update the application state. It will be executed on initial application load, as well as every time the title value changes - by another client, because changes made from us are immediately reflected in the UI for performance reasons, as stated earlier. **This sums up the two-way binding between our Redux state and Firebase, providing the app with real-time updates.**
 
 Head over to `src/store/actions/feature/setTitle.js` action file and modify it to be like this:
 
@@ -555,11 +583,11 @@ const setTitle = payload => (dispatch, getState, getFirebase) => {
 	} = state;
 
 	const config = {
-		ref: "feature/title",
-		payload,
-		oldState,
-		firebase,
-		dispatch
+		ref: "feature/title", // Path in firebase to update
+		payload, // Payload value
+		oldState, // Old state object
+		firebase, // Firebase instance
+		dispatch // Redux dispatch function
 	};
 
     // Update state and firebase independently
@@ -574,14 +602,11 @@ const setTitle = payload => (dispatch, getState, getFirebase) => {
 };
 
 export default setTitle;
-
 ```
 
 ***NOTE:*** The key thing to notice here is that we are calling the Firebase middleware function **independently of Redux state update (dispatch).** This effectively **decouples the UI state from the Firebase state.** This is important, because if we updated the state after the Firebase promise resolution (either success or failure) then **the UI would be unresponsive and laggy.** **This way, we immediately update the application state, assuming changes were successful and revert to the old one, in case something goes wrong. That's why we pass `oldState` to `firebaseUpdateTitle`.**
 
-
-
-Finally, insidfe **`App`** component import `FeatureTitle` component and initialize main layout. Replace the code inside `src/containers/App.js` with the following:
+Finally, inside **`App`** component import `FeatureTitle` component, initialize main layout and register `Feature`component event handlers. Replace the code inside `src/containers/App.js` with the following:
 
 ```javascript
 import "./App.css";
@@ -589,9 +614,17 @@ import "./App.css";
 import FeatureTitle from "../components/FeatureTitle";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import setupFeatureListeners from "../store/actions/feature/setupFirebaseListeners";
 
 function App() {
 	const dispatch = useDispatch();
+
+	// Setting up listeners
+	useEffect(() => {
+		dispatch(setupFeatureListeners());
+	}, []);
 
 	return (
 		<main className="max-w-7xl mx-auto my-5 px-4 sm:px-6 lg:px-8">
@@ -605,5 +638,14 @@ function App() {
 }
 
 export default App;
-
 ```
+
+Go to `localhost:3000` and you should be able see our component in the center of the page. Open a second tab/browser and try changing the input value. Changes should be synchronized between tabs/windows after the specified `debounce` timeout (500 ms in this case).
+
+![FeatureTitle component centered in page](/media/featuretitle.png "FeatureTitle component")
+
+- - -
+
+That's it for this part, hope it wasn't tedious. Let me know if you found it interesting.
+
+Any feedback is also appreciated. Stay tuned for part 3! 😎
