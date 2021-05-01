@@ -7,7 +7,7 @@ export default {
     ...chronoblogTheme.color,
     text: '#161b1d',
     background: '#fff',
-    link: '#f8ed62',
+    link: '#8f67bf',
     primary: '#f8ed62',
     secondary: '#161b1d',
     muted: '#f8ed62',
@@ -19,7 +19,7 @@ export default {
         secondary: '#eaeaea',
         background: '#161b1d',
         muted: '#8f67bf',
-        link: '#8f67bf',
+        link: '#f8ed62',
         primary: '#8f67bf'
       }
     }
