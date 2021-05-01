@@ -1,7 +1,9 @@
 ---
 title: Real-time app using React, Redux, Tailwind CSS & Firebase - Part 2
+cover: /media/react-redux-firebase.png
 date: 2021-05-01T07:49:53.548Z
-description: In this part we will
+description: In this part we are going to setup Redux, connect it to Firebase
+  and create our first component.
 slug: real-time-scrum-voting-app-part-2
 tags:
   - javascript
@@ -44,8 +46,6 @@ hide: false
     * [Debounce function](#debounce-function)
     * [Push updates to Firebase](#push-updates-to-firebase)
     * [Receive updates from Firebase](#receive-updates-from-firebase)
-
-
 
 - - -
 
