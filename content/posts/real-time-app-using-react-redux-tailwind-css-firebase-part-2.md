@@ -13,13 +13,14 @@ draft: false
 hide: false
 ---
 # Table of contents
+
 * ## **1. [Setting up Redux](#setting-up-redux)**
 
-   * [Why vanilla redux](#why-vanilla-redux)
-   * [Configuring the store](#configuring-the-store)
+  * [Why vanilla redux](#why-vanilla-redux)
+  * [Configuring the store](#configuring-the-store)
 
-      * [Root reducer](#root-reducer)
-      * [Application root file](#application-root-file)
+    * [Root reducer](#root-reducer)
+    * [Application root file](#application-root-file)
   * [App component](#app-component)
   * [Installing Redux devtools](#installing-redux-devtools)
 * ## **2. [Creating FeatureTitle component](#creating-featuretitle-component)**
@@ -28,18 +29,18 @@ hide: false
   * [Designing FeatureTitle component](#designing-featuretitle-component)
   * [Crafting the state](#crafting-the-state)
 
-      * [Constants](#constants)
-      * [Actions](#actions)
-      * [Reducer](#reducer)
+    * [Constants](#constants)
+    * [Actions](#actions)
+    * [Reducer](#reducer)
 * ## **3. [Adding Firebase persistence](#adding-firebase-persistence)**
 
   * [Connect Firebase with application](#connect-firebase-with-application)
   * **[Some tips:](#--some-tips---)**
 
-      * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
-      * [Compose method](#compose-method)
-      * [ApplyMiddleware method](#applymiddleware-method)
-      * [Redux Thunk](#redux-thunk)
+    * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
+    * [Compose method](#compose-method)
+    * [ApplyMiddleware method](#applymiddleware-method)
+    * [Redux Thunk](#redux-thunk)
   * [Connect Firebase with component](#connect-firebase-with-component)
 
     * [Debounce function](#debounce-function)
@@ -187,7 +188,7 @@ Close and re-open chrome devtools and refresh the page. You should be able to se
 
 # Creating FeatureTitle component
 
-Now that we've set up Redux we are ready to create our first component! We will begin by **designing a generic Input component**, then move on to **crafting its state** and finally add **Firebase persistence**. By taking a look at our [component diagram](https://blog.manos-liakos.dev/media/voting-app-components.png) from the previous part, we can clearly see that `FeatureTitle`and `UserName`are simple `input` components with their functionality doubling as **data input** and **data display**. A generic `Input`component is going to be used to facilitate the creation of `FeatureTitle`and **`UserName`** components.
+Now that we've set up Redux we are ready to create our first component! We will begin by **designing a generic Input component**, then move on to **crafting its state** and finally add **Firebase persistence**. By taking a look at our [component diagram](https://blog.manos-liakos.dev/media/voting-app-components.png) from the previous part, we can clearly see that `FeatureTitle`and `UserName`are simple `input` components with their functionality doubling as **data input** and **data display**. A generic `Input` component is going to be used to facilitate the creation of `FeatureTitle`and **`UserName`** components.
 
 ## Designing a generic Input component
 
@@ -236,7 +237,7 @@ Input.propTypes = {
 export default Input;
 ```
 
-We created a generic, fairly flexible `Input`component with dynamic styling, placeholder, etc., to use throughout our app as we see fit.
+We created a generic, fairly flexible `Input` component with dynamic styling, placeholder, etc., to use throughout our app as we see fit.
 
 ***NOTE:*** Using `propTypes` is not necessary, but is highly recommended, especially when not using any other form of type-checking, such as Typescript. Type-checking can help **catch bugs**, as well as **document our code**. In this project, we are going to use them, so if you are not going to omit them run `npm i prop-types` to install the relevant package.
 
@@ -278,7 +279,7 @@ const FeatureTitle = () => {
 export default FeatureTitle;
 ```
 
-I hope that the code is mostly self-explaining. We basically grab the current title from the central store using `useSelector` hook (like `useState`, but for Redux) and assign **`value`** and `disabled`props based on its value. We also create a dispatcher to handle the "onChange" event, by dispatching the **`SET_TITLE`** action along with its payload (the new value).
+I hope that the code is mostly self-explaining. We basically grab the current title from the central store using `useSelector` hook (like `useState`, but for Redux) and assign **`value`** and `disabled` props based on its value. We also create a dispatcher to handle the `onChange` event, by dispatching the **`SET_TITLE`** action along with its payload (the new value).
 
 ## Crafting the state
 
@@ -483,7 +484,7 @@ It applies the given **middleware** and returns a **store enhancer**.
 
 #### Redux Thunk
 
-Redux Thunk is a middleware which allows us to **create actions that return a function instead of an action object.** This function, when called, returns the action object instead which in turn gets passed as an argument to the dispatcher.
+[Redux Thunk](https://github.com/reduxjs/redux-thunk) is a middleware which allows us to **create actions that return a function instead of an action object.** This function, when called, returns the action object instead which in turn gets passed as an argument to the dispatcher.
 
 ### Connect Firebase with component
 
