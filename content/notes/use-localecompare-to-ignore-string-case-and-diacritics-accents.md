@@ -4,7 +4,7 @@ cover: /media/js_strings.png
 date: 2021-04-28T16:09:24.468Z
 slug: locale-compare
 tags:
-  - note
+  - post
   - javascript
 ---
 It's a very common scenario when you have to compare strings ignoring their case. The usual approach is to convert both of them to upper or lower case:
@@ -18,7 +18,7 @@ console.log(
 ); // true
 ```
 
-But what about when comparing accented strings like Café, Jalapeño or résumé ? Here's where the `localeCompare `method comes in handy. From [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare):
+But what about when comparing accented strings like Café, Jalapeño or résumé ? Here's where the `localeCompare`method comes in handy. From [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare):
 
 > The **`localeCompare()`** method returns a number indicating whether a reference string comes before, or after, or is the same as the given string in sort order.
 
