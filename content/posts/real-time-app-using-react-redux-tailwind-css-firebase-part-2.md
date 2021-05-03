@@ -35,7 +35,7 @@ hide: false
 * ## **3. [Adding Firebase persistence](#adding-firebase-persistence)**
 
   * [Connect Firebase with application](#connect-firebase-with-application)
-  * **[Some tips:](#--some-tips---)**
+  * **[Some tips:](#some-tips)**
 
     * [Middleware vs Store Enhancers](#middleware-vs-store-enhancers)
     * [Compose method](#compose-method)
