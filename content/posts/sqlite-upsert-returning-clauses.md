@@ -12,7 +12,7 @@ tags:
 
 You can read the official docs [here](https://sqlite.org/lang_returning.html).
 
-Many times we find ourselves wanting to return some data (probably the id) after inserting records in our database. Since version `3.35.0` (2021-03-12), SQLite supports the `RETURNING` clause, which allows you to **return a result row (or specific columns) for each modified database row by a `DELETE`, `UPDATE `or `INSERT `statement.** 
+Many times we find ourselves wanting to return some data (probably the id) after inserting records in our database. Since version `3.35.0` (2021-03-12), SQLite supports the `RETURNING` clause, which allows you to **return a result row (or specific columns) for each modified database row by a `DELETE`, `UPDATE`or `INSERT`statement.** 
 
 ```sql
 INSERT INTO customers (fullName, birthdateTimestamp, address) 
@@ -40,19 +40,17 @@ CREATE TABLE IF NOT EXISTS "action_records" (
 	"errorMsg" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT),
 	FOREIGN KEY("userID") REFERENCES "users"("id") ON DELETE CASCADE,
-    UNIQUE(userID, session_start_timestamp)
+    UNIQUE(userID, sessionStartTimestamp)
 );
 
 -- Insert new record or update the old one based on UNIQUE_CONSTRAINT OF userID & session_start_timestamp
 INSERT INTO action_records (userID, errorMsg, sessionStartTimestamp) 
 VALUES (258, null, 643911868) 
-ON CONFLICT(userID, session_start_timestamp) -- Conflict when a record for the same user and session exists
-DO UPDATE SET error_msg = 'An error occured'
-WHERE error_msg IS NOT NULL -- This will be a no-op in case there is already an error and you don't want to update it
-RETURNING *;
+ON CONFLICT(userID, sessionStartTimestamp) -- Conflict when a record for the same user and session exists
+DO UPDATE SET errorMsg = 'An error occured'
+WHERE errorMsg IS NOT NULL -- This will be a no-op in case there is already an error and you don't want to update it
+RETURNING *; -- Optionally adding RETURNING to retrieve any number of columns we want
 ```
-
-
 
 # UPSERT & RETURNING combined
 
