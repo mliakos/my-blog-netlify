@@ -20,7 +20,7 @@ VALUES ('Andrew Mitch', 643911868, '206 Grange Road, Gillingham')
 RETURNING *;
 ```
 
-The above query, after execution, will return us every value inserted in the database, along with `id` of each row. This way we can avoid make another `SELECT` query to the database. Pretty neat, eh?
+The above query, after execution, will return us every value inserted in the database, along with the `id` of each row. This way we can avoid making another `SELECT` query to the database. Pretty neat, eh?
 
 # The UPSERT clause
 
@@ -54,4 +54,4 @@ RETURNING *; -- Optionally adding RETURNING to retrieve any number of columns we
 
 # UPSERT & RETURNING combined
 
-One thing I really liked is the fact that you can combine both those clauses by simply adding `RETURNING *` at the end of the query. This way any row (or specific columns), either inserted or updated, will be returned.
+One thing I really liked is the fact that you can combine those clauses by simply adding `RETURNING *` at the end of the query. This way any row (or specified columns), either inserted or updated, will be returned.
