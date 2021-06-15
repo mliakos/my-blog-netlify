@@ -2,6 +2,7 @@
 title: "CRLF: A song of pain and frustration"
 date: 2021-06-15T15:30:19.374Z
 description: ""
+slug: crlf-a-song-of-pain-and-frustration
 draft: true
 ---
 - Line endings in stopwords file weird bug (windows CRLF vs unix LF)
