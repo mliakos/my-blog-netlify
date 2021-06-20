@@ -10,7 +10,7 @@ draft: false
 ---
 # Introduction
 
-Have you ever had an issue with line endings, because the file was created on another OS? I actually had line endings cause a weird and hard-to-troubleshoot bug in one of my dependencies that used `txt`files. No, I'm serious. **I ended up using a HEX editor to keep my sanity from going bananas.** That's what you could end up doing after a long and tiresome coding session, so go ahead and make yourself a favor by reading the rest of this post (jk) 🤣
+Have you ever had an issue with line endings, because the file was created on another OS? I actually had line endings cause a weird and hard-to-troubleshoot bug in one of my dependencies that used `txt` files. No, I'm serious. **I ended up using a HEX editor to keep my sanity from going bananas.** That's what you could end up doing after a long and tiresome coding session, so go ahead and make yourself a favor by reading the rest of this post (jk) 🤣
 
 In this article I am going to briefly discuss this problem, as well as why different operating systems sometimes use different line endings - DOS/Windows uses `CR` AND `LF` as `EOL` character, while UNIX uses only `LF`. Line endings, as any other character, are encoded in numbers which are in turn encoded in bytes. The [ASCII](https://en.wikipedia.org/wiki/ASCII) character encoding standard is responsible for mapping those characters to numbers. Technically, `CRLF` is more accurate, but more on this later.
 
