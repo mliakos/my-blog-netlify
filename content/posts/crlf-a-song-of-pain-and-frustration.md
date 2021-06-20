@@ -1,5 +1,6 @@
 ---
 title: "CRLF: Mind the line"
+cover: /media/typewriter.jpg
 date: 2021-06-15T15:30:19.374Z
 description: ""
 slug: crlf-mind-the-line
