@@ -2,7 +2,9 @@
 title: "CRLF: Mind the line"
 cover: /media/typewriter.jpg
 date: 2021-06-15T15:30:19.374Z
-description: ""
+description: In this article I am going to briefly discuss the problems line
+  endings might create, as well as why different operating systems sometimes use
+  different line endings.
 slug: crlf-mind-the-line
 tags:
   - post
