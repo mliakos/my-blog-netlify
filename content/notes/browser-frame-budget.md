@@ -1,6 +1,7 @@
 ---
 title: Browser frame budget
 date: 2021-07-25T14:05:04.581Z
+description: browser-frame-budget
 tags:
   - performance
 ---
