@@ -1,7 +1,10 @@
 ---
 title: Arrays passed to template literals get coerced to strings
 date: 2020-12-04
-tags: ['note', 'javascript']
+slug: arrays-template-literals
+tags:
+  - note
+  - javascript
 hide: false
 ---
 
