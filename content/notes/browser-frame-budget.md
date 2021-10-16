@@ -5,6 +5,7 @@ description: ""
 slug: browser-frame-budget
 tags:
   - performance
+  - note
 ---
 A refresh rate of **60 FPS** is typical for any device these days. This means that in the timeframe of 1 second, the browser has to draw 1 frame on the screen, which in turn means that each frame has a **time budget of 16.6ms** (1 second / 60 frames = 16.66ms). Drawing this frame in 16.6ms includes:
 
