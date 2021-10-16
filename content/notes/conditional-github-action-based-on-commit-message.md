@@ -4,6 +4,7 @@ date: 2021-10-13T16:10:10.371Z
 slug: conditional-github-action
 tags:
   - git
+  - note
 ---
 It's really annoying having a certain build/deployment GitHub action run on every push.
 
