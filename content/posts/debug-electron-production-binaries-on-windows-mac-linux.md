@@ -1,5 +1,6 @@
 ---
 title: Debug Electron production binaries on Windows, Mac & Linux
+cover: /media/electron.png
 date: 2021-10-20T08:46:23.078Z
 description: In this short article, I would like to show you how to debug
   Electron production binaries in Windows, Mac & Linux.
