@@ -9,7 +9,7 @@ tags:
   - electron
   - javascript
 ---
-In this short article, I would like to show you how to debug Electron production binaries in Windows, Mac & Linux. 
+In this short article, I would like to show you how to debug Electron production binaries on Windows, Mac & Linux. 
 
 Sometimes you might want to see the log output of a production binary built with Electron and for some reason the web resources on this subject are extremely limited, rendering this a non-trivial task.
 
@@ -97,7 +97,5 @@ This is the easiest of the three. Just open the app from a terminal and you shal
 ```
 
 Note: I haven't tried it with any target other than `AppImage`, but I presume that it should work in the same way.
-
-
 
 Hope this was useful, thanks for reading! 🤓
