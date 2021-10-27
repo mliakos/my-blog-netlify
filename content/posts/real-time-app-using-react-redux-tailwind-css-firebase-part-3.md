@@ -9,11 +9,27 @@ tags:
   - react
   - redux
 draft: false
-hide: true
+hide: false
 ---
-Previously in [part 2](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2), we did all the hard work of setting up **Redux** & **Firebase**, plus creating and connecting our **first component.** In this part, we are going to add the initial user functionality by assigning a default, random username when first visiting the app and also being able to edit it.
+# Table of contents
 
-- - -
+* [Setting up](#setting-up)
+* [Creating Heading component](#creating-heading-component)
+* [Creating UserName component](#creating-username-component)
+
+  * [Crafting the state](#crafting-the-state)
+
+    * [Constants](#constants)
+    * [Actions](#actions)
+    * [Reducers](#reducers)
+* [Adding Firebase persistence](#adding-firebase-persistence)
+
+  * [Push updates to Firebase](#push-updates-to-firebase)
+  * [Receive updates from Firebase](#receive-updates-from-firebase)
+
+    - - -
+
+Previously in [part 2](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2), we did all the hard work of setting up **Redux** & **Firebase**, plus creating and connecting our **first component.** In this part, we are going to add the initial user functionality by assigning a default, random username when first visiting the app and also being able to edit it.
 
 As per the requirements laid out in the [first part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1):
 
@@ -22,9 +38,7 @@ As per the requirements laid out in the [first part](https://blog.manos-liakos.d
 
 So, let's go and see what we can do! 🚀🚀
 
-# **Heading component**
-
-## Setting up
+# Setting up
 
 The `Heading` component is going to host the application title, as well as the `UserName` component itself. Inside the `components` folder create a `Heading` folder and add two more things:
 
@@ -67,9 +81,7 @@ const removeLocalStorage = key => {
 export default removeLocalStorage;
 ```
 
-
-
-## Creating Heading component
+# Creating Heading component
 
 Import our `UserName` component (which we are going to implement right after) and place it inside the  `Heading`, along with a simple title for our app and some styles. Paste the following code inside the `Heading.js` file:
 
@@ -96,7 +108,7 @@ const Heading = () => {
 export default Heading;
 ```
 
-## Creating UserName component
+# Creating UserName component
 
 Under `components/Heading/UserName` create an `index.js` file and add the following code:
 
@@ -219,12 +231,12 @@ const addUser = payload => (dispatch, getState, getFirebase) => {
 export default addUser;
 ```
 
-What we just created above is called a **thunk** which, as we stated [here in the previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2#redux-thunk), is basically an **enhanced action** which returns a **function** instead of an **object**. Inside this function we can run any **asynchronous code** we want, as well as **dispatch other actions.** Notice how `dispatch`, `getState`and `getFirebase`methods are provided as arguments to our action by the **thunk middleware.**
+What we just created above is called a **thunk** which, as we stated [here in the previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2#redux-thunk), is basically an **enhanced action** which returns a **function** instead of an **object**. Inside this function we can run any **asynchronous code** we want, as well as **dispatch other actions.** Notice how  `dispatch`, `getState` and `getFirebase` methods are provided as arguments to our action, by the **thunk middleware.**
 
 Once again, I hope that the comments help explain what's going on above. We are doing two main things here:
 
 * Creating a config object to pass to `firebaseAddUser` (which is called asynchronously).
-* Persist username to local storage. This is going to be useful in order to getting the user identified correctly and not create a new one each time he visits the app on the same browser (provided he doesn't clear the local storage).
+* Persist username to local storage. This is going to be useful in getting the user identified correctly and not creating a new one, each time he visits the app on the same browser (provided he doesn't clear the local storage).
 
 Also, notice how we are not dispatching any action to update the state. The reason is that there can be no change in the UI state (and thus a visual change), **until we get a response from the database.** It's also an **automatic** and **one-time procedure**, while the result is stored in local storage, so no Redux persistence is needed.
 
@@ -344,7 +356,7 @@ export default combineReducers({
 
 ## Push updates to Firebase
 
-Now we have to persist our Redux data to Firebase, just as we did in the previous part for the `FeatureTitle` component. Under `src/firebase` create a `users` folder and add a `addUser.js` file. Then paste the following code:
+Now we have to persist our Redux data to Firebase, just as we did in the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2) for the `FeatureTitle` component. Under `src/firebase` create a `users` folder and add an `addUser.js` file. Then paste the following code:
 
 ```javascript
 import { SET_USERS } from "../../store/constants/users";
@@ -409,11 +421,11 @@ const updateUser = ({
 export default debounce(updateUser, 500);
 ```
 
-The logic is very similar here, except that we are also debouncing the action, since it is tied to manual user typing and can very well be spammed.
+The logic is very similar here, except that we are also debouncing the action, since it is subject to manual user typing and can very well be spammed.
 
 ## Receive updates from Firebase
 
-Same as with the `FeatureTitle` component from the previous part, we need to setup the appropriate listeners in order to successfully receive updates from Firebase and update our Redux store. Inside `store/actions/users` folder the we have created, add a new file named `setupFirebaseListeners.js`. The code inside this file is going to do exactly that: Setup the appropriate listeners in order to subscribe to updates from Firebase.
+Same as with the `FeatureTitle` component from the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2), we need to setup the appropriate listeners in order to successfully receive updates from Firebase and update our Redux store. Inside `store/actions/users` folder the we have created, add a new file named `setupFirebaseListeners.js`. The code inside this file is going to do exactly that: Setup the appropriate listeners in order to subscribe to updates from Firebase.
 
 ```javascript
 import { ADD_USER, UPDATE_USER } from "../../constants/users";
@@ -462,7 +474,7 @@ const setupUsersListener = () => (dispatch, getState, getFirebase) => {
 export default setupUsersListener;
 ```
 
-The thunk we created above is going to be dispatched once on application start and listeners for the relevant Firebase events are going to be registered. Import the action and dispatch it inside `App.js`:
+The thunk we created above is going to be dispatched **once** on application start and listeners for the relevant Firebase events are going to be registered. Import the action and dispatch it inside `App.js`:
 
 ```javascript
 import "./App.css";
