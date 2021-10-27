@@ -11,19 +11,16 @@ tags:
 draft: false
 hide: false
 ---
-# Table of contents
+## Table of contents
 
-* [Setting up](#setting-up)
-* [Creating Heading component](#creating-heading-component)
-* [Creating UserName component](#creating-username-component)
-
+- [Setting up](#setting-up)
+- [Creating Heading component](#creating-heading-component)
+- [Creating UserName component](#creating-username-component)
   * [Crafting the state](#crafting-the-state)
-
-    * [Constants](#constants)
-    * [Actions](#actions)
-    * [Reducers](#reducers)
-* [Adding Firebase persistence](#adding-firebase-persistence)
-
+    + [Constants](#constants)
+    + [Actions](#actions)
+    + [Reducers](#reducers)
+- [Adding Firebase persistence](#adding-firebase-persistence)
   * [Push updates to Firebase](#push-updates-to-firebase)
   * [Receive updates from Firebase](#receive-updates-from-firebase)
 
@@ -38,7 +35,7 @@ As per the requirements laid out in the [first part](https://blog.manos-liakos.d
 
 So, let's go and see what we can do! 🚀🚀
 
-# Setting up
+## Setting up
 
 The `Heading` component is going to host the application title, as well as the `UserName` component itself. Inside the `components` folder create a `Heading` folder and add two more things:
 
@@ -81,7 +78,7 @@ const removeLocalStorage = key => {
 export default removeLocalStorage;
 ```
 
-# Creating Heading component
+## Creating Heading component
 
 Import our `UserName` component (which we are going to implement right after) and place it inside the  `Heading`, along with a simple title for our app and some styles. Paste the following code inside the `Heading.js` file:
 
@@ -108,7 +105,7 @@ const Heading = () => {
 export default Heading;
 ```
 
-# Creating UserName component
+## Creating UserName component
 
 Under `components/Heading/UserName` create an `index.js` file and add the following code:
 
@@ -174,11 +171,11 @@ export default UserName;
 
 I have placed some comments to make things easier to grasp. We basically add an `Input` component, which will a have a dual role: Displaying our current username and changing it.
 
-## Crafting the state
+### Crafting the state
 
 Let's go ahead and create anything state-related to **add** and **update** users.
 
-### Constants
+#### Constants
 
 Under `store/constants` create a file named `users.js`. It will contain all the **action constants** for the user slice.
 
@@ -190,7 +187,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const SET_USERS = "SET_USERS"; // This is going to be used for state reversion
 ```
 
-### Actions
+#### Actions
 
 Under `store/actions` create a folder named `users`. It will hold all user-related actions. First, we are going to create an action to **add** a user, so go ahead and create a file named `addUser.js`. Then paste the following code:
 
@@ -286,7 +283,7 @@ Some notes:
 * The reason why we are specifying the `resetActionType` is because later on, we are going to be using a different reducer when resetting the state, based on whether we are **updating a single user** or **resetting the votes for every user.**
 * In contrast to the `addUser` action, here we are dispatching an action to update the state which happens **asynchronously and independently of the Firebase update, in order to maintain a responsive UI.**
 
-### Reducers
+#### Reducers
 
 Under `store/reducers` create a `users.js` file to create our users reducers. Then paste the following:
 
@@ -352,9 +349,9 @@ export default combineReducers({
 });
 ```
 
-# Adding Firebase persistence
+## Adding Firebase persistence
 
-## Push updates to Firebase
+### Push updates to Firebase
 
 Now we have to persist our Redux data to Firebase, just as we did in the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2) for the `FeatureTitle` component. Under `src/firebase` create a `users` folder and add an `addUser.js` file. Then paste the following code:
 
@@ -423,7 +420,7 @@ export default debounce(updateUser, 500);
 
 The logic is very similar here, except that we are also debouncing the action, since it is subject to manual user typing and can very well be spammed.
 
-## Receive updates from Firebase
+### Receive updates from Firebase
 
 Same as with the `FeatureTitle` component from the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2), we need to setup the appropriate listeners in order to successfully receive updates from Firebase and update our Redux store. Inside `store/actions/users` folder the we have created, add a new file named `setupFirebaseListeners.js`. The code inside this file is going to do exactly that: Setup the appropriate listeners in order to subscribe to updates from Firebase.
 
