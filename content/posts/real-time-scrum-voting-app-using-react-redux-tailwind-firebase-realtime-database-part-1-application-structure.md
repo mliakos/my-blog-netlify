@@ -17,6 +17,8 @@ Hi y' all, this is part 1 of a multi-part series, in which we are going to build
 
 - - -
 
+**NOTE**: This series goes a bit unconventional, by not using any libraries or abstractions for Redux, following plain Flux architecture conventions. The recommended way of writing Redux is by using [RTK (Redux Toolkit)](https://redux-toolkit.js.org/).
+
 # Stack
 
 * **React & Redux** for state management.
