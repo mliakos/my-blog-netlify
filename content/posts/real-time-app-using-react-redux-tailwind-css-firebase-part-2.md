@@ -48,6 +48,7 @@ hide: false
     * [Receive updates from Firebase](#receive-updates-from-firebase)
 
 - - -
+**NOTE**: This series goes a bit unconventional, by not using any libraries or abstractions for Redux, following plain Flux architecture conventions. The recommended way of writing Redux is by using [RTK (Redux Toolkit)](https://redux-toolkit.js.org/).
 
 In the [previous part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1) we laid out the requirements, planned the architecture and initialized firebase. Now, we are going to setup Redux, connect it to Firebase and create our first component.
 
