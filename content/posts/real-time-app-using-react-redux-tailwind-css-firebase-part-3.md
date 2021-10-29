@@ -26,6 +26,8 @@ hide: false
 
     - - -
 
+**NOTE**: This series goes a bit unconventional, by not using any libraries or abstractions for Redux, following plain Flux architecture conventions. The recommended way of writing Redux is by using [RTK (Redux Toolkit)](https://redux-toolkit.js.org/).
+
 Previously in [part 2](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-2), we did all the hard work of setting up **Redux** & **Firebase**, plus creating and connecting our **first component.** In this part, we are going to add the initial user functionality by assigning a default, random username when first visiting the app and also being able to edit it.
 
 As per the requirements laid out in the [first part](https://blog.manos-liakos.dev/real-time-scrum-voting-app-part-1):
