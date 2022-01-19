@@ -15,6 +15,7 @@ hide: true
 ## The procedure at a glance
 
 * Initialize a react-electron-boilerplate app.
+* Make necessary changes to webpack and electron configuration.
 * Write our code.
 * Download and install Bytenode.
 * Configure webpack entries for multiple processes/threads (production only).
