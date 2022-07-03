@@ -1,6 +1,8 @@
 ---
 title: Cleaner imports with aliases in React & TypeScript
+cover: /media/0_aalu2ujaef8quipp.png
 date: 2022-07-03T12:21:55.282Z
+description: Using aliased instead of relative imports in React & TypeScript.
 ---
 ## The problem with relative imports
 
