@@ -1,5 +1,6 @@
 ---
 title: Jest with TypeScript and aliased imports (custom paths)
+cover: /media/gd97g4kdyk1bpdeyfqst.png
 date: 2023-02-07T18:49:22.582Z
 description: How to configure Jest with a TypeScript project, while also using
   custom path mapping.
@@ -9,10 +10,10 @@ In this post we are going to setup `jest` for a `TypeScript` project with custom
 
 We are going to use `yarn` package manager. However, there are no differences with `npm` - other than the commands themselves.
 
-# Install Jest
+## Install Jest
 - Run `yarn add --dev jest`.
 
-# Add TS support
+## Add TS support
 - Add type support: `yarn add --dev @types/jest`
 - Install `ts-jest`. It's a custom jest transformer that will help us use Jest with TypeScript.
 - Run `yarn jest --init` to initialize a config file. Answer the questions as you wish (ask Yes for TS support).
@@ -26,7 +27,7 @@ We are going to use `yarn` package manager. However, there are no differences wi
 }
 ```
 
-# Add path support
+## Add path support
 
 - Make sure you have at least the following config in `jest.config.ts`:
 
